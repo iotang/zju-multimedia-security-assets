@@ -29,12 +29,8 @@ for file in os.listdir(dataset_path):
         try:
             print(f"Find image: {file}")
             img = Image.open(file_path)
-            if img.size[0] * img.size[1] > 1920 * 1080:
-                continue
             if bw_count(img) >= 0.50:
                 dataset.append(img)
-                if len(dataset) > 20:
-                    break
         except IOError:
             pass
 

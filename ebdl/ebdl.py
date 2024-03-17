@@ -29,8 +29,7 @@ def embed(
 ) -> Image.Image:
     raw, wtm = preprocess(img, wtm)
     raw = raw + alpha * (1 if msg else -1) * wtm
-    raw = raw.clip(0, 255)
-    raw = raw.astype(np.uint8)
+    raw = np.around(raw).clip(0, 255).astype(np.uint8)
     return Image.fromarray(raw, mode="L")
 
 

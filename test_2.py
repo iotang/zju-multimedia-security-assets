@@ -17,6 +17,8 @@ def bw_count(img: Image.Image) -> float:
     return 1.00 * count / raw.size
 
 
+print("Collecting images")
+
 result_path = "./test2_result"
 os.makedirs(result_path, exist_ok=True)
 
@@ -27,14 +29,19 @@ for file in os.listdir(dataset_path):
     file_path = os.path.join(dataset_path, file)
     if os.path.isfile(file_path):
         try:
-            print(f"Find image: {file}")
             img = Image.open(file_path)
-            if bw_count(img) <= 0.10:
-                dataset.append(img)
+            dataset.append(img)
         except IOError:
             pass
 
-img = random.choice(dataset)
+print("Finding images satisfies limit")
+random.shuffle(dataset)
+img = None
+for i in dataset:
+    if bw_count(i) <= 0.10:
+        img = i
+        break
+
 img.save(os.path.join(result_path, "test_2.png"))
 height = img.size[1]
 width = img.size[0]

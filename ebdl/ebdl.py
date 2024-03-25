@@ -37,3 +37,19 @@ def detect(img: Image.Image, wtm: np.ndarray) -> float:
     raw, wtm = preprocess(img, wtm)
     res = raw * wtm
     return np.sum(res, dtype=float) / raw.size
+
+
+def embed_noclip(
+    img: Image.Image, wtm: np.ndarray, msg: bool = True, alpha: float = 1
+) -> np.ndarray:
+    raw, wtm = preprocess(img, wtm)
+    raw = raw + alpha * (1 if msg else -1) * wtm
+    raw = np.around(raw).astype(np.int16)
+    return raw
+
+
+def detect_raw(raw: np.ndarray, wtm: np.ndarray) -> float:
+    wtm = wtm.copy()
+    wtm.resize(raw.shape)
+    res = raw * wtm
+    return np.sum(res, dtype=float) / raw.size

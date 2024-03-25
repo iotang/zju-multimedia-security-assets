@@ -56,6 +56,10 @@ for i in range(0, 200):
     Image.fromarray(wtm_visual).save(
         os.path.join(result_path, "test2_watermark", f"test2_watermark_{i}.png")
     )
+    np.save(
+        os.path.join(result_path, "test2_watermark", f"test2_watermark_{i}.npy"),
+        wtm_set[-1],
+    )
 
 result_pos = []
 result_ntr = []

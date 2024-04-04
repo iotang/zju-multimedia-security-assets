@@ -49,24 +49,24 @@ def test_img(img, wtm_list, msg: int):
 
 
 if __name__ == "__main__":
-    result_path = "./test2_result"
+    result_path = "./test4_result"
     os.makedirs(result_path, exist_ok=True)
 
-    dataset_path = "../data"
-    dataset = []
+    # dataset_path = "../data"
+    # dataset = []
 
-    for file in os.listdir(dataset_path):
-        file_path = os.path.join(dataset_path, file)
-        if os.path.isfile(file_path):
-            try:
-                img = Image.open(file_path)
-                dataset.append(img)
-            except IOError:
-                pass
+    # for file in os.listdir(dataset_path):
+    #     file_path = os.path.join(dataset_path, file)
+    #     if os.path.isfile(file_path):
+    #         try:
+    #             img = Image.open(file_path)
+    #             dataset.append(img)
+    #         except IOError:
+    #             pass
 
-    img = random.choice(dataset)
+    # img = random.choice(dataset)
 
-    img.save(os.path.join(result_path, "test.png"))
+    img = Image.open("rec2.bmp")
 
     max_height = img.size[1]
     max_width = img.size[0]
@@ -91,10 +91,10 @@ if __name__ == "__main__":
         f.write("\n")
         f.write(str(confidence_wo))
         f.write("\n")
-        f.write(f"All: {len(dataset)}\n")
+        f.write(f"All: {1}\n")
         f.write(f"Correct: {correct} / {test_count}\n")
         f.write(f"Incorrect: {incorrect} / {test_count}\n")
         f.write(f"TP: {true_pos} / {test_count}\n")
-        f.write(f"TN: {true_neg} / {len(dataset)}\n")
-        f.write(f"FP: {false_pos} / {len(dataset)}\n")
+        f.write(f"TN: {true_neg} / {1}\n")
+        f.write(f"FP: {false_pos} / {1}\n")
         f.write(f"FN: {false_neg} / {test_count}\n")

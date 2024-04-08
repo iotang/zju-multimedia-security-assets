@@ -11,7 +11,9 @@ def make_watermark(seed, size: tuple[int, int]) -> np.ndarray:
     return wtm
 
 
-def embed(img: Image.Image, wtm_list: list[np.ndarray], msg: int) -> Image.Image:
+def embed(
+    img: Image.Image, wtm_list: list[np.ndarray], msg: int, strength: float = -1
+) -> Image.Image:
     if img.mode != "L":
         print("Warning: this function is made for grayscale images")
         img = img.convert(mode="L")
@@ -33,7 +35,11 @@ def embed(img: Image.Image, wtm_list: list[np.ndarray], msg: int) -> Image.Image
         wtm_embed[i].resize(raw.shape)
 
     wtm_sum = np.sum(wtm_embed, axis=0)
-    wtm_sum = wtm_sum / wtm_sum.std() * math.sqrt(len(wtm_list))
+    wtm_sum = (
+        wtm_sum
+        / wtm_sum.std()
+        * (math.sqrt(len(wtm_list)) if strength < 0 else strength)
+    )
 
     raw = raw + wtm_sum
     raw = np.around(raw).clip(0, 255).astype(np.uint8)

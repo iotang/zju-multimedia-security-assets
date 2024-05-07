@@ -5,6 +5,14 @@ import math
 
 def make_watermark(seed, size: tuple[int, int]) -> np.ndarray:
     np.random.seed(seed)
+    wtm = np.random.normal(0, 1, size=size).astype(float)
+    wtm -= np.mean(wtm)
+    wtm /= np.std(wtm)
+    return wtm
+
+
+def make_watermark_2(seed, size: tuple[int, int]) -> np.ndarray:
+    np.random.seed(seed)
     wtm = np.random.randint(0, 256, size=size).astype(float)
     wtm -= np.mean(wtm)
     wtm /= np.std(wtm)

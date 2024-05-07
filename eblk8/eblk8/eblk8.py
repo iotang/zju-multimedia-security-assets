@@ -64,7 +64,7 @@ def embed(
         )
         raise
 
-    raw = np.array(img)
+    raw = np.array(img).astype(float)
     # trel = ""
     trel_state = 0
     wtm_list = []

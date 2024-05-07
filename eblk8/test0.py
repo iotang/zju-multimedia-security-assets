@@ -65,7 +65,7 @@ if __name__ == "__main__":
     # random.shuffle(dataset)
 
     for i in range(2**8):
-        test_img(Image.open("8.gif"), 0, i)
+        test_img(Image.open("more_data_12.jpg"), 0, i)
 
         with open(os.path.join(result_path, "result.txt"), mode="w") as f:
             f.write(str(confidence_wi))

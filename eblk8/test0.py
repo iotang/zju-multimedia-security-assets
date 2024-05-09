@@ -4,7 +4,7 @@ import os
 import random
 from functools import partial
 
-from eblk8 import eblk8
+from eblk8 import eblk8_bare
 
 test_count = 0
 correct = 0
@@ -20,7 +20,9 @@ confidence_wo = []
 def test_img(img, seed, msg: int):
     global test_count, correct, incorrect, true_pos, true_neg, false_pos, false_neg, confidence_wi, confidence_wo
     if msg >= 0:
-        msg_get, confidence = eblk8.detect(eblk8.embed(img, msg, 8, seed), 8, seed)
+        msg_get, confidence = eblk8_bare.detect(
+            eblk8_bare.embed(img, msg, 8, seed), 8, seed
+        )
         confidence_wi.append(confidence)
         print(msg, msg_get, confidence)
 
@@ -36,7 +38,7 @@ def test_img(img, seed, msg: int):
             false_neg += 1
 
     else:
-        msg_get, confidence = eblk8.detect(img, 8, seed)
+        msg_get, confidence = eblk8_bare.detect(img, 8, seed)
         confidence_wo.append(confidence)
 
         if confidence > 0:
@@ -64,7 +66,7 @@ if __name__ == "__main__":
 
     # random.shuffle(dataset)
 
-    for i in range(2**8):
+    for i in range(-1, 2**4):
         test_img(Image.open("more_data_12.jpg"), 0, i)
 
         with open(os.path.join(result_path, "result.txt"), mode="w") as f:

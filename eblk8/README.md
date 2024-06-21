@@ -69,8 +69,8 @@ python test5_mp.py
 
 ### 另行测试
 
-可以通过下列语句使用 esimple8：
+可以通过下列语句使用 eblk8：
 
 ```python
-from esimple8 import esimple8
+from eblk8 import eblk8
 ```
